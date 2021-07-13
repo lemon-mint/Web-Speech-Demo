@@ -74,16 +74,10 @@ const runpage = debounce(async () => {
     }
 });
 
-window.ontouchstart = runpage;
-window.onclick = runpage;
-window.onclose = runpage;
-window.onmousemove = runpage;
-window.onmouseenter = runpage;
-window.onmouseleave = runpage;
-window.ondrag = runpage;
-
 (async () => {
-    runpage();
+    setInterval(() => {
+        runpage();
+    }, 300);
 })();
 
 function makeData(lang, text) {
