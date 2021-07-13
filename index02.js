@@ -15,14 +15,6 @@ function fromBinary(encoded) {
     return String.fromCharCode(...new Uint16Array(bytes.buffer));
 }
 
-function debounce(func, timeout = 300) {
-    let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { func.apply(this, args); }, timeout);
-    };
-}
-
 function getVoice() {
     return new Promise((resolve, reject) => {
         const retry = () => {
@@ -65,20 +57,19 @@ async function play(lang, str) {
     return 0;
 }
 
+const pagedata = getData();
 
-const runpage = debounce(async () => {
-    const pagedata = getData();
+const runpage = async () => {
     if (pagedata.lang && pagedata.text) {
         once = false;
         await play(pagedata.lang, pagedata.text);
     }
-});
+}
 
-(async () => {
-    setInterval(() => {
-        runpage();
-    }, 300);
-})();
+function runint() {
+    setInterval(runpage, 500);
+    runpage();
+}
 
 function makeData(lang, text) {
     return toBinary(JSON.stringify({ lang: lang, text: text }));
