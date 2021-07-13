@@ -47,8 +47,9 @@
                 const vs = await getLangVoices(langinput.value);
                 if (vs.length > 0) {
                     document.getElementById("vname").innerText = "Voice: " + vs[0].name;
+                } else {
+                    document.getElementById("vname").innerText = ""+undefined;
                 }
-                document.getElementById("vname").innerText = ""+undefined;
             })();
         }
         generateLink();
