@@ -66,11 +66,6 @@ const runpage = async () => {
     }
 }
 
-function runint() {
-    setInterval(runpage, 500);
-    runpage();
-}
-
 function makeData(lang, text) {
     return toBinary(JSON.stringify({ lang: lang, text: text }));
 }

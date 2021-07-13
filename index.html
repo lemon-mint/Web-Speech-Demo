@@ -1,13 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>www</title>
-    <script src="/index02.js" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+    <script src="/index02.js"></script>
 </head>
+
 <body>
-    <button onclick="runint();">Click here</button>
+    <h1>Web speechSynthesis API</h1>
+    <button onclick="runbtn();" style="width: 100%; height: 40px">Click here to play</button>
+    <hr>
+    <br>
+    <div id="h" hidden>
+        <input type="text" placeholder="Input text" value="Hello" id="0">
+        <input type="text" placeholder="language" value="ko-KR" id="1">
+        <button id="2">play</button>
+        <h1>Generate Link</h1>
+        <input id="output" style="width: 80%">
+        
+        <button class="cp" data-clipboard-target="#output">
+            Copy to clipboard
+        </button>
+    </div>
+    
+    <script>
+        const textinput = document.getElementById("0");
+        const langinput = document.getElementById("1");
+        const preview = document.getElementById("2");
+        const output = document.getElementById("output");
+        
+        function runbtn() {
+            document.getElementById("h").hidden = false;
+            runpage();
+        }
+
+        function generateLink() {
+            const b64data = makeData(langinput.value, textinput.value);
+            output.value = window.location.href + "#" + b64data;
+        }
+        generateLink();
+
+        textinput.oninput = generateLink;
+        langinput.oninput = generateLink;
+        preview.onclick = ()=>{
+            play(langinput.value, textinput.value);
+        };
+    </script>
+    <script>
+        new ClipboardJS('.cp');
+    </script>
 </body>
+
 </html>
