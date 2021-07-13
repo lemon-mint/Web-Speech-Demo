@@ -40,7 +40,7 @@
 
         function generateLink() {
             const b64data = makeData(langinput.value, textinput.value);
-            output.value = window.location.href + "#" + b64data;
+            output.value = location.protocol + "//" + location.host + "?q=" + b64data;
         }
         generateLink();
 

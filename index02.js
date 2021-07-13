@@ -43,7 +43,7 @@ async function getLangVoices(lang) {
 }
 
 function getData() {
-    const hash = String(window.location.hash).substring(1);
+    const hash = String(window.location.search).substring(3);
     return JSON.parse(fromBinary(hash));
 }
 
@@ -57,9 +57,9 @@ async function play(lang, str) {
     return 0;
 }
 
-const pagedata = getData();
 
 const runpage = async () => {
+    const pagedata = getData();
     if (pagedata.lang && pagedata.text) {
         once = false;
         await play(pagedata.lang, pagedata.text);
