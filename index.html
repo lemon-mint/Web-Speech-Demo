@@ -21,6 +21,7 @@
         <button id="2">play</button>
         <br>
         <h3 id="vname"></h3>
+        <h4 id="pro"></h4>
         <h1>Generate Link</h1>
         <input id="output" style="width: 80%">
         
@@ -47,8 +48,10 @@
                 const vs = await getLangVoices(langinput.value);
                 if (vs.length > 0) {
                     document.getElementById("vname").innerText = "Voice: " + vs[0].name;
+                    document.getElementById("pro").innerText = "URI: " + vs[0].voiceURI;
                 } else {
                     document.getElementById("vname").innerText = ""+undefined;
+                    document.getElementById("pro").innerText = ""+undefined;
                 }
             })();
         }
