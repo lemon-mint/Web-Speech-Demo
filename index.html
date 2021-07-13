@@ -19,6 +19,8 @@
         <input type="text" placeholder="Input text" value="Hello" id="0">
         <input type="text" placeholder="language" value="ko-KR" id="1">
         <button id="2">play</button>
+        <br>
+        <h3 id="vname"></h3>
         <h1>Generate Link</h1>
         <input id="output" style="width: 80%">
         
@@ -41,6 +43,12 @@
         function generateLink() {
             const b64data = makeData(langinput.value, textinput.value);
             output.value = location.protocol + "//" + location.host + "?q=" + b64data;
+            (async function() {
+                const vs = await getLangVoices(langinput.value);
+                if (vs.length > 0) {
+                    document.getElementById("vname").innerText = "Voice: " + vs[0].name;
+                }
+            })();
         }
         generateLink();
 
@@ -49,6 +57,7 @@
         preview.onclick = ()=>{
             play(langinput.value, textinput.value);
         };
+
     </script>
     <script>
         new ClipboardJS('.cp');
